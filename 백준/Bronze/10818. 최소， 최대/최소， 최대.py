@@ -1,0 +1,5 @@
+t=int(input())
+n_list = list(map(int,input().split()))
+x=min(n_list)
+y=max(n_list)
+print(x,y)
