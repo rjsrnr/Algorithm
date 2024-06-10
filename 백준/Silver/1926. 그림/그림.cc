@@ -51,6 +51,8 @@ void bfs(int y, int x) {
 
 
 int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
 	input();
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
