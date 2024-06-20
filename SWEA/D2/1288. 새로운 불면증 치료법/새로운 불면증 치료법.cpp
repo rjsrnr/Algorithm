@@ -3,9 +3,8 @@
 
 using namespace std;
 
-int N;
-int goal = (1 << 10) - 1;
-int ans;
+int N, ans, cnt;
+int map[10];
 
 
 int main() {
@@ -13,17 +12,22 @@ int main() {
 	cin >> T;
 	for (int tc = 1; tc <= T; tc++) {
 		cin >> N;
-		
+		for (int i = 0; i < 10; i++) {
+			map[i] = 0;
+		}
+		cnt = 0;
 		int time = 1;
-		int result = 0;
 		while (1) {
 			string cmp = to_string(N * time);
 			for (int i = 0; i < cmp.length(); i++) {
 				int tmp = cmp[i] - '0';
-				result = result | (1 << tmp);
+				if (map[tmp] == 0) {
+					map[tmp] = 1;
+					cnt++;
+				}
 			}
 
-			if (result == goal){
+			if (cnt == 10){
 				ans = stoi(cmp);
 				break;
 			}
