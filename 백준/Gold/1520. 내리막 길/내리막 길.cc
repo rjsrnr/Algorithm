@@ -1,54 +1,46 @@
 #include <iostream>
-#include <queue>
 
 using namespace std;
 
 struct point {
     int y, x;
-    long long val;
-};
-struct cmp {
-    bool operator() (point a, point b) {
-        return a.val < b.val;
-    }
 };
 
-int arr[501][501];
-long long map[501][501];
-int dy[] = { -1,1,0,0 }, dx[] = { 0,0,-1,1 };
-priority_queue<point, vector<point>, cmp> pq;
+int N, M;
+int map[501][501], dp[501][501], dy[] = { -1,1,0,0 }, dx[] = { 0,0,-1,1 };
+int visited[501][501];
 
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int N, M;
-    cin >> N >> M;
-    map[0][0] = 1;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            int val;
-            cin >> val;
-            arr[i][j] = val;
-            pq.push({ i,j,val });
-        }
-    }
-    while (!pq.empty()) {
-        point now = pq.top();
-        pq.pop();
+int solve(point now) {
+    if (now.y == N - 1 && now.x == M - 1)
+        return 1;
+    if (visited[now.y][now.x] == 0) {
+        visited[now.y][now.x] = 1;
 
         for (int i = 0; i < 4; i++) {
             point next = { 0, };
             next.y = now.y + dy[i];
             next.x = now.x + dx[i];
-            if (next.y >= N || next.x >= M || next.x < 0 || next.y < 0)
+            if (map[now.y][now.x] <= map[next.y][next.x])
                 continue;
-            if (arr[now.y][now.x] >= arr[next.y][next.x])
+            if (next.y < 0 || next.x < 0 || next.y >= N || next.x >= M)
                 continue;
-            map[now.y][now.x] += map[next.y][next.x];
-
+            dp[now.y][now.x] += solve(next);
         }
     }
-    cout << map[N - 1][M - 1];
-    return 0;
+    return dp[now.y][now.x];
+}
 
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> N >> M;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            cin >> map[i][j];
+        }
+    }
+    cout << solve({ 0,0 });
+
+    return 0;
 }
