@@ -10,7 +10,7 @@ int main() {
     cin.tie(0);
     int N;
     cin >> N;
-    for (int i = 0; i < 100001; i++)
+    for (int i = 0; i <= N; i++)
         dp[i] = 21e8;
     for (int i = 1; i <= 320; i++) {
         arr[i] = i * i;
