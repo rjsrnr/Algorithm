@@ -1,4 +1,4 @@
-# [Silver II] 1, 2, 3 더하기 5 - 15990 
+# [Silver I] 1, 2, 3 더하기 5 - 15990 
 
 [문제 링크](https://www.acmicpc.net/problem/15990) 
 
